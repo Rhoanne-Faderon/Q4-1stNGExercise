@@ -1,69 +1,72 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <!-- place your own content on the meta below -->
-    <meta name="viewport" content="width=device-width">
-    <meta name="author" content="">
-    <meta name="description" content="">
-    <meta name="keywords" content="">
-    <title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Draw Triangle</title>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <script src="https://www.w3schools.com/lib/w3.js"></script>
-    <link href="./style.css" rel="stylesheet" type="text/css" />
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="/style.css">
 </head>
 
 <body>
-    <!-- Navigation (Stays on Top) -->
-    <div class="w3-top w3-bar w3-black">
-        <a href="/" class="w3-bar-item w3-button">Input</a>
-        <a href="/draw" class="w3-bar-item w3-button">Draw</a>
-    </div>
 
-    <!-- Start Content -->
-    <div id="home" class="w3-container w3-content w3-padding-64">
-        <h2>Square with Side {{sideLength}} </h2>
-        <canvas class=" w3-white" id="mycanvas" width="100" height="100"> 
-          <!-- do not remove, this defines the drawing area/canvas with size of 100 by 100 -->
-        </canvas>
-    </div>
-    <footer class="w3-padding-large"> &copy; 2024 Sir Roy</footer>
+<div class="w3-top w3-bar w3-black">
+    <a href="/" class="w3-bar-item w3-button">Input</a>
+    <a href="/draw" class="w3-bar-item w3-button">Draw</a>
+</div>
 
-    <script>
+<div id="home" class="w3-container w3-content w3-padding-64">
+    <h2>Triangle with Side {{sideLength}}</h2>
+    <canvas class="w3-white" id="mycanvas" width="600" height="600"></canvas>
+</div>
 
-        function drawSquare() {
+<footer class="w3-padding-large">
+    <p>&copy; 2028 Rufaderon</p>
+</footer>
 
-            // sample use of handlbars 
-            const s = {{sideLength}};
 
-            let canvas = document.getElementById("mycanvas");
-            canvas.width = (s + 50);
-            canvas.height = (s + 50);
-            console.log(s)
+<script>
+    function drawTriangle() {
+        const side = {{sideLength}};
 
-            var ctx = canvas.getContext("2d");
-            const o = 20; //offset to have space surroundig the square
-            // moving to the starting point
-            ctx.moveTo(o, o);
-            ctx.lineTo(o, o + s);
-            ctx.lineTo(o + s, o + s)
-            ctx.lineTo(o + s, o);
-            ctx.lineTo(o, o);
+        const canvas = document.getElementById("mycanvas");
+        const ctx = canvas.getContext("2d");
 
-            // for placing text
-            ctx.fillText(s, o + (s / 2), o + s)
-            ctx.fillText(s, o + 0, o + s / 2) 
-            
-            // to actually display the triangle
-            ctx.stroke();
-        }
+        canvas.width = side + 150;
+        canvas.height = side + 150;
 
-        drawSquare(); // call the call function
-    </script>
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+        const offset = 50;
+
+        
+        ctx.beginPath();
+        ctx.moveTo(offset, offset + side);  
+        ctx.lineTo(offset + side, offset + side);  
+        ctx.lineTo(offset, offset);  
+        ctx.closePath();
+
+        ctx.strokeStyle = "#555";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        
+        ctx.fillStyle = "#000";
+        ctx.font = "16px Arial";
+        
+        
+        ctx.fillText(side, offset + (side / 2) - 10, offset + side + 20);
+        
+        
+        ctx.fillText(side, offset - 40, offset + (side / 2));
+
+        
+        const hypotenuse = Math.round(Math.sqrt(2 * side ** 2));
+        ctx.fillText(hypotenuse, offset + (side / 2) + 10, offset + (side / 2) - 10);
+    }
+
+    drawTriangle();
+</script>
 
 </body>
-
 </html>
